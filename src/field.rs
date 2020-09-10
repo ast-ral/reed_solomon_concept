@@ -1,6 +1,6 @@
 /// This trait represents a [Galois Field](https://en.wikipedia.org/wiki/Finite_field).
 /// The max supported order is 2 ** 64.
-pub trait GaloisField {
+pub trait Field {
 	// The order of the field.
 	const ORDER: u64;
 
@@ -20,11 +20,4 @@ pub trait GaloisField {
 
 	/// Produces the multiplicative inverse of `elem`.
 	fn inv(elem: &Self::Element) -> Self::Element;
-
-	/// Raises the generator [`Self::ALPHA`](trait.GaloisField.html#associatedconstant.ALPHA)
-	/// to the power specified by num.
-	fn exp(num: u128) -> Self::Element;
-
-	/// Takes the logarithm of `elem` base [`Self::ALPHA`](trait.GaloisField.html#associatedconstant.ALPHA).
-	fn log(elem: &Self::Element) -> u128;
 }
