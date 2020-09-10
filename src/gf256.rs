@@ -30,22 +30,6 @@ const fn mul(left: u8, right: u8) -> u8 {
 	product as u8
 }
 
-const fn mul_table() -> [[u8; 256]; 256] {
-	let mut out = [[0; 256]; 256];
-
-	let mut a: u16 = 0;
-	while a < 256 {
-		let mut b: u16 = 0;
-		while b < 256 {
-			out[a as usize][b as usize] = mul(a as u8, b as u8);
-			b += 1;
-		}
-		a += 1;
-	}
-
-	out
-}
-
 const fn inv_table() -> [u8; 256] {
 	let mut out = [0; 256];
 
@@ -75,8 +59,6 @@ const fn inv_table() -> [u8; 256] {
 	out
 }
 
-const MUL_TABLE: [[u8; 256]; 256] = mul_table();
-
 const INV_TABLE: [u8; 256] = inv_table();
 
 impl Field for GF256 {
@@ -94,7 +76,7 @@ impl Field for GF256 {
 	}
 
 	fn mul(left: &u8, right: &u8) -> u8 {
-		MUL_TABLE[*left as usize][*right as usize]
+		mul(*left, *right)
 	}
 
 	fn neg(elem: &u8) -> u8 {
