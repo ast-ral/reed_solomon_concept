@@ -12,12 +12,12 @@ pub trait Field {
 	/// A primitive element (multiplicative generator) for the field.
 	const ALPHA: Self::Element;
 
-	fn add(left: &Self::Element, right: &Self::Element) -> Self::Element;
-	fn mul(left: &Self::Element, right: &Self::Element) -> Self::Element;
+	fn add(left: Self::Element, right: Self::Element) -> Self::Element;
+	fn mul(left: Self::Element, right: Self::Element) -> Self::Element;
 
 	/// Produces the additive inverse or negation of `elem`.
-	fn neg(elem: &Self::Element) -> Self::Element;
+	fn neg(elem: Self::Element) -> Self::Element;
 
 	/// Produces the multiplicative inverse of `elem`.
-	fn inv(elem: &Self::Element) -> Self::Element;
+	fn inv(elem: Self::Element) -> Self::Element;
 }

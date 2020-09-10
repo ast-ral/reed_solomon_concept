@@ -71,21 +71,21 @@ impl Field for GF256 {
 
 	const ALPHA: u8 = 2;
 
-	fn add(left: &u8, right: &u8) -> u8 {
+	fn add(left: u8, right: u8) -> u8 {
 		left ^ right
 	}
 
-	fn mul(left: &u8, right: &u8) -> u8 {
-		mul(*left, *right)
+	fn mul(left: u8, right: u8) -> u8 {
+		mul(left, right)
 	}
 
-	fn neg(elem: &u8) -> u8 {
-		*elem
+	fn neg(elem: u8) -> u8 {
+		elem
 	}
 
-	fn inv(elem: &u8) -> u8 {
-		assert!(*elem != 0);
-		INV_TABLE[*elem as usize]
+	fn inv(elem: u8) -> u8 {
+		assert!(elem != 0);
+		INV_TABLE[elem as usize]
 	}
 }
 
@@ -93,8 +93,8 @@ impl Field for GF256 {
 fn test_inverses() {
 	for i in 1 .. 256 {
 		let elem = i as u8;
-		let inv = GF256::inv(&elem);
+		let inv = GF256::inv(elem);
 
-		assert!(GF256::mul(&elem, &inv) == 1);
+		assert!(GF256::mul(elem, inv) == 1);
 	}
 }
