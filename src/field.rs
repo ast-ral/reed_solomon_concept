@@ -1,10 +1,11 @@
 /// This trait represents a [Galois Field](https://en.wikipedia.org/wiki/Finite_field).
-/// The max supported order is 2 ** 64.
+/// The max supported sequence length is whatever can fit in a `usize`.
 pub trait Field {
 	// The order of the field.
-	const ORDER: u64;
+	const SEQUENCE_LENGTH: usize;
 
 	type Element: Copy;
+	type SequenceIterator: Iterator<Item = Self::Element>;
 
 	const ZERO: Self::Element;
 	const ONE: Self::Element;
@@ -23,4 +24,6 @@ pub trait Field {
 
 	fn is_zero(elem: Self::Element) -> bool;
 	fn is_one(elem: Self::Element) -> bool;
+
+	fn sequence() -> Self::SequenceIterator;
 }
