@@ -20,4 +20,7 @@ pub trait Field {
 
 	/// Produces the multiplicative inverse of `elem`.
 	fn inv(elem: Self::Element) -> Self::Element;
+
+	fn is_zero(elem: Self::Element) -> bool;
+	fn is_one(elem: Self::Element) -> bool;
 }

@@ -87,6 +87,14 @@ impl Field for GF256 {
 		assert!(elem != 0);
 		INV_TABLE[elem as usize]
 	}
+
+	fn is_zero(elem: u8) -> bool {
+		elem == 0
+	}
+
+	fn is_one(elem: u8) -> bool {
+		elem == 1
+	}
 }
 
 #[test]
