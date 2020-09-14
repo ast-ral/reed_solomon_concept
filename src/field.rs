@@ -5,7 +5,6 @@ pub trait Field {
 	const SEQUENCE_LENGTH: usize;
 
 	type Element: Copy;
-	type SequenceIterator: Iterator<Item = Self::Element>;
 
 	const ZERO: Self::Element;
 	const ONE: Self::Element;
@@ -24,6 +23,4 @@ pub trait Field {
 
 	fn is_zero(elem: Self::Element) -> bool;
 	fn is_one(elem: Self::Element) -> bool;
-
-	fn sequence() -> Self::SequenceIterator;
 }

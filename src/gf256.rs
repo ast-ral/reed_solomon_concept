@@ -63,10 +63,9 @@ const fn inv_table() -> [u8; 256] {
 const INV_TABLE: [u8; 256] = inv_table();
 
 impl Field for GF256 {
-	const SEQUENCE_LENGTH: usize = 256;
+	const SEQUENCE_LENGTH: usize = 255;
 
 	type Element = u8;
-	type SequenceIterator = GF256SequenceIterator;
 
 	const ZERO: u8 = 0;
 	const ONE: u8 = 1;
@@ -97,13 +96,6 @@ impl Field for GF256 {
 	fn is_one(elem: u8) -> bool {
 		elem == 1
 	}
-
-	fn sequence() -> Self::SequenceIterator {
-		GF256SequenceIterator {
-			counter: 0,
-			done: false,
-		}
-	}
 }
 
 #[test]
@@ -113,27 +105,5 @@ fn test_inverses() {
 		let inv = GF256::inv(elem);
 
 		assert!(GF256::mul(elem, inv) == 1);
-	}
-}
-
-pub struct GF256SequenceIterator {
-	counter: u8,
-	done: bool,
-}
-
-impl Iterator for GF256SequenceIterator {
-	type Item = u8;
-
-	fn next(&mut self) -> Option<u8> {
-		if self.done {
-			None
-		} else if self.counter == 255 {
-			self.done = true;
-			Some(255)
-		} else {
-			let n = self.counter;
-			self.counter += 1;
-			Some(n)
-		}
 	}
 }
